@@ -1,5 +1,6 @@
 /*
  * Copyright 2021 Kaur Palang
+ * Copyright 2023 Julian Pufler
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,47 +15,40 @@
  * limitations under the License.
  */
 
-package com.kaurpalang.mirthpluginsample.shared.interfaces;
+package com.dedalus.adminplugin.shared.interfaces;
 
 import com.kaurpalang.mirth.annotationsplugin.annotation.MirthApiProvider;
 import com.kaurpalang.mirth.annotationsplugin.type.ApiProviderType;
-import com.kaurpalang.mirthpluginsample.shared.MyPermissions;
-import com.kaurpalang.mirthpluginsample.shared.model.MyInfoObject;
+import com.dedalus.adminplugin.shared.Constants;
+import com.dedalus.adminplugin.shared.model.CustomMapping;
 import com.mirth.connect.client.core.ClientException;
 import com.mirth.connect.client.core.api.BaseServletInterface;
 import com.mirth.connect.client.core.api.MirthOperation;
-import com.mirth.connect.client.core.api.Param;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.List;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("/myplugin")
-@Tag(name = "MyPlugin operations")
+@Path("/custom-mappings")
+@Tag(name = Constants.POINT_NAME + " | " + Constants.MAPPINGS_TAB_NAME)
 @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 @MirthApiProvider(type = ApiProviderType.SERVLET_INTERFACE)
-public interface MyServletInterface extends BaseServletInterface {
+public interface CustomMappingsServletInterface extends BaseServletInterface {
 
-    @GET
-    @Path("/getsomething")
-    @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    @ApiResponse(responseCode = "200", description = "Found the information",
-            content = {
-                    @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = MyInfoObject.class)),
-                    @Content(mediaType = MediaType.APPLICATION_XML, schema = @Schema(implementation = MyInfoObject.class))
-            })
-    @MirthOperation(
-            name = "getSomething",
-            display = "Get important information",
-            permission = MyPermissions.GETSTH
-    )
-    MyInfoObject getSomething(
-            @Param("identifier") @Parameter(description = "The identifier of our important information to retrieve.", required = true) @QueryParam("identifier") String identifier)
-            throws ClientException;
+        @GET
+        @Path("/all")
+        @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+        @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+        @ApiResponse(responseCode = "200", description = "Custom Mappings Data", content = {
+                        @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = List.class)),
+                        @Content(mediaType = MediaType.APPLICATION_XML, schema = @Schema(implementation = List.class))
+        })
+        @MirthOperation(name = "getAllMappings", display = "Retrieve all mappings")
+        List<CustomMapping> getAllMappings() throws ClientException;
 }

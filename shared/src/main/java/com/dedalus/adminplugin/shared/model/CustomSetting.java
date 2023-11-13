@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Kaur Palang
+ * Copyright 2023 Julian Pufler
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,30 @@
  * limitations under the License.
  */
 
-package com.kaurpalang.mirthpluginsample.shared;
+package com.dedalus.adminplugin.shared.model;
 
-public final class MyPermissions {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
-    public static final String GETSTH = "myplugin_permission_getsth";
+@AllArgsConstructor
+public class CustomSetting {
+    @Getter
+    @Setter
+    private String id;
 
-    public MyPermissions() {}
+    @Getter
+    @Setter
+    @NonNull
+    private String key;
+
+    @Getter
+    @Setter
+    @NonNull
+    private String value;
+
+    @Getter
+    @Setter
+    private String description;
 }

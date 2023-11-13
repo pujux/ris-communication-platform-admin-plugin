@@ -1,32 +1,33 @@
-# A sample NextGen connect Plugin project
+# Communication Platform Admin Plugin
 
-A sample [NextGen Connect](https://github.com/nextgenhealthcare/connect) plugin.
-
-This repository is used in [this guide on writing Mirth plugins](https://github.com/kpalang/mirth-plugin-guide).
-
----
+This plugin is used to add a settings panel to the Mirth Administrator GUI which enables the configuration of custom settings and custom mappings from inside the Mirth Administrator GUI.
 
 ## Installation
+
 1. [Install Java](https://www.javatpoint.com/javafx-how-to-install-java)
-1. [Install Maven](https://www.javatpoint.com/how-to-install-maven)
-1. Run `git clone https://github.com/kpalang/mirth-sample-plugin`
-1. Navigate to `mirth-sample-plugin/`
-1. Run `mvn install` to install dependencies to local cache
-1. Run `mvn clean package` to verify the build works
-1. Try to install the sample plugin by getting the `.zip` archive from `mirth-sample-plugin/distribution/target`
----
+2. [Install Maven](https://www.javatpoint.com/how-to-install-maven)
+3. Run `git clone https://github.com/DedalusDIIT/ris-communication-platform-admin-plugin`
+4. Navigate to `ris-communication-platform-version-plugin/`
+5. [Create](https://github.com/kpalang/mirth-plugin-guide#---signing-and-publishing) a `keystore.jks` file in `certificate/`
+6. Run `mvn install` to install dependencies to local cache
+7. Run `mvn clean package` to verify the build works
+8. You can now find the plugins `.zip` archive in `distribution/target`
 
 ## Usage
 
-Use this repository as a base to develop your own plugins.
+You can find the custom panel under "Settings", it should be the rightmost tab. Once opened, you should be presented with options to configure settings and mappings.
 
-**This repository showcases use of [mirth-plugin-maven-plugin](https://github.com/kpalang/mirth-plugin-maven-plugin) to generate `plugin.xml` file!**
+## License
 
-- Any external libraries that you might want to use in the plugin at runtime, go into `libs/runtime/{type}`
-- Any external libraries that you might want to use at compiletime, go into `libs/compiletime/{type}`
+Copyright 2021 Kaur Palang<br/>
+Copyright 2023 Julian Pufler
 
----
-## TODO
-* More simplification
+Licensed under the Apache License, Version 2.0 (the "License");<br/>
+You may not use this code except in compliance with the License.
+You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 
-# Pull requests are always welcome
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br/>
+See the License for the specific language governing permissions and
+limitations under the License.

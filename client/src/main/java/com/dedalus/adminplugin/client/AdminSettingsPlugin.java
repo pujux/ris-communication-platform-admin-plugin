@@ -1,5 +1,6 @@
 /*
  * Copyright 2021 Kaur Palang
+ * Copyright 2023 Julian Pufler
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,37 +15,36 @@
  * limitations under the License.
  */
 
-package com.kaurpalang.mirthpluginsample.client;
+package com.dedalus.adminplugin.client;
 
 import com.kaurpalang.mirth.annotationsplugin.annotation.MirthClientClass;
-import com.kaurpalang.mirthpluginsample.client.panel.MainSettingsPanel;
-import com.kaurpalang.mirthpluginsample.shared.MyConstants;
+import com.dedalus.adminplugin.client.panel.AdminSettingsPanel;
+import com.dedalus.adminplugin.shared.Constants;
 import com.mirth.connect.client.ui.AbstractSettingsPanel;
 import com.mirth.connect.plugins.SettingsPanelPlugin;
 
 @MirthClientClass
-public class MySettingsPlugin extends SettingsPanelPlugin {
+public class AdminSettingsPlugin extends SettingsPanelPlugin {
 
-    private MainSettingsPanel mainSettingsPanel;
+    private AdminSettingsPanel panel;
 
-    public MySettingsPlugin(String name) {
+    public AdminSettingsPlugin(String name) {
         super(name);
     }
 
     @Override
     public AbstractSettingsPanel getSettingsPanel() {
-        return this.mainSettingsPanel;
+        return this.panel;
     }
 
     @Override
     public String getPluginPointName() {
-        return MyConstants.PLUGIN_POINTNAME;
+        return Constants.POINT_NAME;
     }
 
     @Override
     public void start() {
-        System.out.println("Hello from the other slide!");
-        this.mainSettingsPanel = new MainSettingsPanel();
+        this.panel = new AdminSettingsPanel();
     }
 
     @Override

@@ -1,5 +1,6 @@
 /*
  * Copyright 2021 Kaur Palang
+ * Copyright 2023 Kaur Palang
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +15,11 @@
  * limitations under the License.
  */
 
-package com.kaurpalang.mirthpluginsample.server;
+package com.dedalus.adminplugin.server;
 
+import com.dedalus.adminplugin.DbConnection;
+import com.dedalus.adminplugin.shared.Constants;
 import com.kaurpalang.mirth.annotationsplugin.annotation.MirthServerClass;
-import com.kaurpalang.mirthpluginsample.shared.MyConstants;
-import com.kaurpalang.mirthpluginsample.shared.MyPermissions;
-import com.kaurpalang.mirthpluginsample.shared.interfaces.MyServletInterface;
-import com.mirth.connect.client.core.api.util.OperationUtil;
 import com.mirth.connect.model.ExtensionPermission;
 import com.mirth.connect.plugins.ServicePlugin;
 
@@ -29,16 +28,14 @@ import java.util.Map;
 import java.util.Properties;
 
 @MirthServerClass
-public class MyServicePlugin implements ServicePlugin {
+public class AdminPlugin implements ServicePlugin {
 
     @Override
     public void init(Properties properties) {
-        System.out.println("Hello world from init!");
     }
 
     @Override
     public void update(Properties properties) {
-        // We don't need to do anything here.
     }
 
     @Override
@@ -48,14 +45,7 @@ public class MyServicePlugin implements ServicePlugin {
 
     @Override
     public ExtensionPermission[] getExtensionPermissions() {
-        ExtensionPermission getPermission = new ExtensionPermission (
-                MyConstants.PLUGIN_POINTNAME,
-                MyPermissions.GETSTH,
-                "Allows getting important information from our plugin",
-                OperationUtil.getOperationNamesForPermission(MyPermissions.GETSTH, MyServletInterface.class), new String[] {}
-        );
-
-        return new ExtensionPermission[] {getPermission};
+        return null;
     }
 
     @Override
@@ -65,16 +55,17 @@ public class MyServicePlugin implements ServicePlugin {
 
     @Override
     public String getPluginPointName() {
-        return MyConstants.PLUGIN_POINTNAME;
+        return Constants.POINT_NAME;
     }
 
     @Override
     public void start() {
-        System.out.println("Hello world from start!");
+        System.out.println("Starting " + Constants.POINT_NAME);
     }
 
     @Override
     public void stop() {
-        System.out.println("Good bye world!");
+        System.out.println("Stopping " + Constants.POINT_NAME);
+        DbConnection.closeConnection();
     }
 }
