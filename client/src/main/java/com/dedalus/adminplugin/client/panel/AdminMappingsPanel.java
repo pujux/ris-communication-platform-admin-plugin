@@ -25,6 +25,7 @@ import com.mirth.connect.client.ui.AbstractSettingsPanel;
 import com.mirth.connect.client.ui.PlatformUI;
 import com.mirth.connect.client.ui.components.MirthButton;
 import com.mirth.connect.client.ui.components.MirthTable;
+
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;

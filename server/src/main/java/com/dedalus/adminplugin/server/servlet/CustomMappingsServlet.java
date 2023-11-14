@@ -21,8 +21,8 @@ import com.kaurpalang.mirth.annotationsplugin.annotation.MirthApiProvider;
 import com.kaurpalang.mirth.annotationsplugin.type.ApiProviderType;
 import com.dedalus.adminplugin.server.DbConnection;
 import com.dedalus.adminplugin.shared.Constants;
-import com.dedalus.adminplugin.shared.model.CustomMapping;
 import com.dedalus.adminplugin.shared.interfaces.CustomMappingsServletInterface;
+import com.dedalus.adminplugin.shared.model.CustomMapping;
 import com.mirth.connect.client.core.ClientException;
 import com.mirth.connect.server.api.MirthServlet;
 

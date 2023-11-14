@@ -20,7 +20,6 @@ package com.dedalus.adminplugin.client.panel;
 import com.dedalus.adminplugin.shared.Constants;
 import com.dedalus.adminplugin.shared.interfaces.CustomSettingsServletInterface;
 import com.dedalus.adminplugin.shared.model.CustomSetting;
-
 import com.mirth.connect.client.core.ClientException;
 import com.mirth.connect.client.ui.AbstractSettingsPanel;
 import com.mirth.connect.client.ui.components.MirthButton;

@@ -18,9 +18,13 @@
 package com.dedalus.adminplugin.client;
 
 import com.kaurpalang.mirth.annotationsplugin.annotation.MirthClientClass;
+
+import java.util.List;
+
 import com.dedalus.adminplugin.client.panel.AdminMappingsPanel;
 import com.dedalus.adminplugin.shared.Constants;
 import com.mirth.connect.client.ui.AbstractSettingsPanel;
+import com.mirth.connect.model.converters.ObjectXMLSerializer;
 import com.mirth.connect.plugins.SettingsPanelPlugin;
 
 @MirthClientClass
@@ -44,6 +48,9 @@ public class AdminMappingsPlugin extends SettingsPanelPlugin {
 
     @Override
     public void start() {
+        ObjectXMLSerializer.getInstance().allowTypes(List.of("com.dedalus.adminplugin.shared.model.CustomSetting"),
+                null, null);
+
         this.panel = new AdminMappingsPanel();
     }
 
