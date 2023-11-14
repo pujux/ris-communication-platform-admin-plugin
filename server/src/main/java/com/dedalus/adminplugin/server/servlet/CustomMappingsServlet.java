@@ -19,10 +19,10 @@ package com.dedalus.adminplugin.server.servlet;
 
 import com.kaurpalang.mirth.annotationsplugin.annotation.MirthApiProvider;
 import com.kaurpalang.mirth.annotationsplugin.type.ApiProviderType;
-import com.dedalus.adminplugin.DbConnection;
+import com.dedalus.adminplugin.server.DbConnection;
 import com.dedalus.adminplugin.shared.Constants;
-import com.dedalus.adminplugin.shared.interfaces.CustomMappingsServletInterface;
 import com.dedalus.adminplugin.shared.model.CustomMapping;
+import com.dedalus.adminplugin.shared.interfaces.CustomMappingsServletInterface;
 import com.mirth.connect.client.core.ClientException;
 import com.mirth.connect.server.api.MirthServlet;
 
@@ -32,7 +32,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Context;
@@ -59,23 +58,22 @@ public class CustomMappingsServlet extends MirthServlet implements CustomMapping
             resultSet = statement.executeQuery(selectSql);
             while (resultSet.next()) {
                 int priority = resultSet.getInt("priority");
-                String mappingId = resultSet.getString("MappingId"),
-                        mappingValueId = resultSet.getString("MappingValueId"),
-                        mappingName = resultSet.getString("mapping_name"),
-                        internalValueSet = resultSet.getString("internal_value_set"),
-                        externalValueSet = resultSet.getString("external_value_set"),
-                        internalCodeSystem = resultSet.getString("internal_code_system"),
-                        externalCodeSystem = resultSet.getString("external_code_system"),
-                        internalValue = resultSet.getString("internal_value"),
-                        externalValue = resultSet.getString("external_value"),
-                        description = resultSet.getString("description"),
-                        defaultInternalCodeSystem = resultSet.getString("default_internal_code_system"),
-                        defaultInternalValue = resultSet.getString("default_internal_value");
+                String mappingId = resultSet.getString("MappingId");
+                String mappingValueId = resultSet.getString("MappingValueId");
+                String mappingName = resultSet.getString("mapping_name");
+                String internalValueSet = resultSet.getString("internal_value_set");
+                String externalValueSet = resultSet.getString("external_value_set");
+                String internalCodeSystem = resultSet.getString("internal_code_system");
+                String externalCodeSystem = resultSet.getString("external_code_system");
+                String internalValue = resultSet.getString("internal_value");
+                String externalValue = resultSet.getString("external_value");
+                String description = resultSet.getString("description");
+                String defaultInternalCodeSystem = resultSet.getString("default_internal_code_system");
+                String defaultInternalValue = resultSet.getString("default_internal_value");
 
                 results.add(new CustomMapping(mappingId, mappingValueId, mappingName, priority, internalValueSet,
                         externalValueSet, internalCodeSystem, externalCodeSystem, internalValue, externalValue,
-                        Optional.of(description), Optional.of(defaultInternalCodeSystem),
-                        Optional.of(defaultInternalValue)));
+                        description, defaultInternalCodeSystem, defaultInternalValue));
             }
         } catch (SQLException e) {
             e.printStackTrace();

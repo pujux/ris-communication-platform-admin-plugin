@@ -22,11 +22,13 @@ import com.kaurpalang.mirth.annotationsplugin.type.ApiProviderType;
 import com.dedalus.adminplugin.shared.Constants;
 import com.dedalus.adminplugin.shared.model.CustomSetting;
 import com.mirth.connect.client.core.ClientException;
+import com.mirth.connect.client.core.Operation.ExecuteType;
 import com.mirth.connect.client.core.api.BaseServletInterface;
 import com.mirth.connect.client.core.api.MirthOperation;
 import com.mirth.connect.client.core.api.Param;
 
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -48,10 +50,10 @@ public interface CustomSettingsServletInterface extends BaseServletInterface {
         @Path("/all")
         @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
         @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-        @MirthOperation(name = "getAllSettings", display = "Retrieve all settings")
+        @MirthOperation(name = "getAllSettings", display = "Retrieve all settings", type = ExecuteType.ASYNC)
         @ApiResponse(responseCode = "200", description = "Successful", content = {
-                        @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = List.class)),
-                        @Content(mediaType = MediaType.APPLICATION_XML, schema = @Schema(implementation = List.class)),
+                        @Content(mediaType = MediaType.APPLICATION_JSON, array = @ArraySchema(schema = @Schema(implementation = CustomSetting.class))),
+                        @Content(mediaType = MediaType.APPLICATION_XML, array = @ArraySchema(schema = @Schema(implementation = CustomSetting.class))),
 
         })
         List<CustomSetting> getAllSettings() throws ClientException;
@@ -60,8 +62,11 @@ public interface CustomSettingsServletInterface extends BaseServletInterface {
         @Path("/upsert")
         @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
         @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-        @MirthOperation(name = "upsertSetting", display = "Upsert a setting")
-        @ApiResponse(responseCode = "200", description = "Successful")
+        @MirthOperation(name = "upsertSetting", display = "Upsert a setting", type = ExecuteType.ASYNC)
+        @ApiResponse(responseCode = "200", description = "Successful", content = {
+                        @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = Boolean.class)),
+                        @Content(mediaType = MediaType.APPLICATION_XML, schema = @Schema(implementation = Boolean.class)),
+        })
         boolean upsertSetting( // workaround because requestBody version doesnt seem to work
                         @Param("id") @Parameter(description = "The settings ID", required = false) @QueryParam("id") String id,
                         @Param("key") @Parameter(description = "The settings key", required = true) @QueryParam("key") String key,
@@ -84,8 +89,11 @@ public interface CustomSettingsServletInterface extends BaseServletInterface {
         @Path("/delete/{id}")
         @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
         @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-        @MirthOperation(name = "deleteSetting", display = "Delete a setting")
-        @ApiResponse(responseCode = "200", description = "Successful")
+        @MirthOperation(name = "deleteSetting", display = "Delete a setting", type = ExecuteType.ASYNC)
+        @ApiResponse(responseCode = "200", description = "Successful", content = {
+                        @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = Boolean.class)),
+                        @Content(mediaType = MediaType.APPLICATION_XML, schema = @Schema(implementation = Boolean.class)),
+        })
         boolean deleteSetting(
                         @Param("id") @Parameter(description = "The ID of the setting to be deleted", required = true) @PathParam("id") String id)
                         throws ClientException;

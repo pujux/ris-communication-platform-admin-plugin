@@ -17,7 +17,6 @@
 
 package com.dedalus.adminplugin.server;
 
-import com.dedalus.adminplugin.DbConnection;
 import com.dedalus.adminplugin.shared.Constants;
 import com.kaurpalang.mirth.annotationsplugin.annotation.MirthServerClass;
 import com.mirth.connect.model.ExtensionPermission;
@@ -45,7 +44,7 @@ public class AdminPlugin implements ServicePlugin {
 
     @Override
     public ExtensionPermission[] getExtensionPermissions() {
-        return null;
+        return new ExtensionPermission[0];
     }
 
     @Override
@@ -60,12 +59,10 @@ public class AdminPlugin implements ServicePlugin {
 
     @Override
     public void start() {
-        System.out.println("Starting " + Constants.POINT_NAME);
     }
 
     @Override
     public void stop() {
-        System.out.println("Stopping " + Constants.POINT_NAME);
         DbConnection.closeConnection();
     }
 }

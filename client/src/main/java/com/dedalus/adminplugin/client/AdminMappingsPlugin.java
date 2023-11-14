@@ -39,7 +39,7 @@ public class AdminMappingsPlugin extends SettingsPanelPlugin {
 
     @Override
     public String getPluginPointName() {
-        return Constants.POINT_NAME;
+        return String.join(" ", Constants.POINT_NAME, Constants.MAPPINGS_TAB_NAME);
     }
 
     @Override

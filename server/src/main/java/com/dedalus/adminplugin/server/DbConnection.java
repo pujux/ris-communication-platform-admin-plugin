@@ -1,4 +1,4 @@
-package com.dedalus.adminplugin;
+package com.dedalus.adminplugin.server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

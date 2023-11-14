@@ -16,8 +16,6 @@
 
 package com.dedalus.adminplugin.shared.model;
 
-import java.util.Optional;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +36,7 @@ public class CustomMapping {
 
     @Getter
     @Setter
-    private Number priority;
+    private int priority;
 
     @Getter
     @Setter
@@ -66,14 +64,14 @@ public class CustomMapping {
 
     @Getter
     @Setter
-    private Optional<String> description;
+    private String description;
 
     @Getter
     @Setter
-    private Optional<String> defaultInternalCodeSystem;
+    private String defaultInternalCodeSystem;
 
     @Getter
     @Setter
-    private Optional<String> defaultInternalValue;
+    private String defaultInternalValue;
 
 }

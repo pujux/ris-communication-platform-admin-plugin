@@ -19,7 +19,7 @@ package com.dedalus.adminplugin.server.servlet;
 
 import com.kaurpalang.mirth.annotationsplugin.annotation.MirthApiProvider;
 import com.kaurpalang.mirth.annotationsplugin.type.ApiProviderType;
-import com.dedalus.adminplugin.DbConnection;
+import com.dedalus.adminplugin.server.DbConnection;
 import com.dedalus.adminplugin.shared.Constants;
 import com.dedalus.adminplugin.shared.interfaces.CustomSettingsServletInterface;
 import com.dedalus.adminplugin.shared.model.CustomSetting;
@@ -52,6 +52,7 @@ public class CustomSettingsServlet extends MirthServlet implements CustomSetting
     @Override
     public List<CustomSetting> getAllSettings() throws ClientException {
         List<CustomSetting> results = new ArrayList<>();
+        System.out.println("getAllSettings");
 
         try (Statement statement = dbConnection.createStatement()) {
             ResultSet resultSet = null;

@@ -22,8 +22,11 @@ import com.kaurpalang.mirth.annotationsplugin.type.ApiProviderType;
 import com.dedalus.adminplugin.shared.Constants;
 import com.dedalus.adminplugin.shared.model.CustomMapping;
 import com.mirth.connect.client.core.ClientException;
+import com.mirth.connect.client.core.Operation.ExecuteType;
 import com.mirth.connect.client.core.api.BaseServletInterface;
 import com.mirth.connect.client.core.api.MirthOperation;
+
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -46,9 +49,9 @@ public interface CustomMappingsServletInterface extends BaseServletInterface {
         @Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
         @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
         @ApiResponse(responseCode = "200", description = "Custom Mappings Data", content = {
-                        @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = List.class)),
-                        @Content(mediaType = MediaType.APPLICATION_XML, schema = @Schema(implementation = List.class))
+                        @Content(mediaType = MediaType.APPLICATION_JSON, array = @ArraySchema(schema = @Schema(implementation = CustomMapping.class))),
+                        @Content(mediaType = MediaType.APPLICATION_XML, array = @ArraySchema(schema = @Schema(implementation = CustomMapping.class))),
         })
-        @MirthOperation(name = "getAllMappings", display = "Retrieve all mappings")
+        @MirthOperation(name = "getAllMappings", display = "Retrieve all mappings", type = ExecuteType.ASYNC)
         List<CustomMapping> getAllMappings() throws ClientException;
 }

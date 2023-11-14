@@ -19,22 +19,15 @@ package com.dedalus.adminplugin.client.panel;
 
 import com.dedalus.adminplugin.shared.Constants;
 import com.dedalus.adminplugin.shared.interfaces.CustomMappingsServletInterface;
-import com.dedalus.adminplugin.shared.interfaces.CustomSettingsServletInterface;
 import com.dedalus.adminplugin.shared.model.CustomMapping;
-import com.dedalus.adminplugin.shared.model.CustomSetting;
 import com.mirth.connect.client.core.ClientException;
 import com.mirth.connect.client.ui.AbstractSettingsPanel;
 import com.mirth.connect.client.ui.PlatformUI;
 import com.mirth.connect.client.ui.components.MirthButton;
-import com.mirth.connect.client.ui.components.MirthCheckBox;
-import com.mirth.connect.client.ui.components.MirthPasswordField;
 import com.mirth.connect.client.ui.components.MirthTable;
-import com.mirth.connect.client.ui.components.MirthTextField;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,16 +46,15 @@ public class AdminMappingsPanel extends AbstractSettingsPanel {
     }
 
     public void doRefresh() {
-        // if (PlatformUI.MIRTH_FRAME.alertRefresh()) {
-        // return;
-        // }
+        if (PlatformUI.MIRTH_FRAME.alertRefresh()) {
+            return;
+        }
         // close any open cell editor before saving
-        // if (this.customMappingsTable.getCellEditor() != null) {
-        // this.customMappingsTable.getCellEditor().stopCellEditing();
-        // }
+        if (this.customMappingsTable.getCellEditor() != null) {
+            this.customMappingsTable.getCellEditor().stopCellEditing();
+        }
 
-        // final String workingId = getFrame().startWorking("Loading " + getTabName() +
-        // " settings...");
+        final String workingId = getFrame().startWorking("Loading " + getTabName() + " ...");
 
         SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
 
@@ -72,8 +64,7 @@ public class AdminMappingsPanel extends AbstractSettingsPanel {
                 try {
                     customMappingValuesList = mappingsService.getAllMappings();
                 } catch (ClientException e) {
-                    // getFrame().alertThrowable(getFrame(), e);
-                    System.out.println("Error: " + e.getMessage());
+                    getFrame().alertThrowable(getFrame(), e);
                 }
                 return null;
             }
@@ -85,7 +76,7 @@ public class AdminMappingsPanel extends AbstractSettingsPanel {
                     // update mapping value table function call
                     System.out.println("Custom Mapping Values loaded: " + customMappingValuesList.size());
                 }
-                // getFrame().stopWorking(workingId);
+                getFrame().stopWorking(workingId);
             }
         };
 
@@ -96,9 +87,10 @@ public class AdminMappingsPanel extends AbstractSettingsPanel {
         return true;
     }
 
-    private void updateCustomMappingsTable(List<CustomMapping> mappings, boolean sort) {
+    // private void updateCustomMappingsTable(List<CustomMapping> mappings, boolean
+    // sort) {
 
-    }
+    // }
 
     // private void updateConfigurationTable(Map<String, ConfigurationProperty> map,
     // boolean show, boolean sort) {
